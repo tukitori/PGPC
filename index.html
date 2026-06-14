@@ -1,65 +1,301 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phùng Gia PC</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện Long Hung PC - Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-<style>
-body{
-    background:#FFFFFF;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
-}
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
-.header{
-    padding:50px 20px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
 
-h1{
-    font-size:40px;
-}
+        /* HEADER & SEARCH BAR */
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 2px solid #d32f2f;
+        }
 
-.btn{
-    display:inline-block;
-    padding:15px 25px;
-    margin:10px;
-    background:#00bfff;
-    color:white;
-    text-decoration:none;
-    border-radius:10px;
-}
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-.card{
-    background:#222;
-    margin:15px;
-    padding:20px;
-    border-radius:15px;
-}
-</style>
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #d32f2f;
+            font-style: italic;
+        }
+
+        .search-container {
+            display: flex;
+            flex-grow: 1;
+            margin: 0 30px;
+            max-width: 600px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d32f2f;
+            border-right: none;
+            outline: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-container button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+        }
+
+        .hotline {
+            color: #d32f2f;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-layout {
+            display: flex;
+            margin-top: 15px;
+            gap: 15px;
+        }
+
+        /* Sidebar Menu bên trái */
+        .sidebar {
+            width: 25%;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .sidebar li:hover {
+            background-color: #f9f9f9;
+            color: #d32f2f;
+        }
+
+        /* Slider & Banners bên phải */
+        .banner-area {
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .main-banner {
+            background-color: #e3f2fd;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border: 1px solid #bbdefb;
+        }
+
+        .sub-banners {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .sub-banner-item {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* SECTION PRODUCT (HÀNG MỚI VỀ) */
+        .product-section {
+            background-color: #0066b2;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            color: #333;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background-color: #eee;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            color: #d32f2f;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-contact {
+            background-color: #fff;
+            color: #d32f2f;
+            border: 1px solid #d32f2f;
+            padding: 8px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-contact:hover {
+            background-color: #d32f2f;
+            color: #fff;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="header">
-<h1>XƯỞNG PC</h1>
-<p>Build PC theo yêu cầu - Gaming - Văn phòng</p>
+    <header>
+        <div class="container header-content">
+            <div class="logo">LH</div>
+            <div class="search-container">
+                <input type="text" placeholder="Nhập từ khóa tìm kiếm...">
+                <button>TÌM KÍM</button>
+            </div>
+            <div class="hotline">
+                <div>Hotline liên hệ</div>
+                <div>098.99x.xxxx</div>
+            </div>
+        </div>
+    </header>
 
-<a class="btn" href="#">Zalo</a>
-<a class="btn" href="#">Facebook</a>
-</div>
+    <div class="container">
+        <main class="main-layout">
+            <aside class="sidebar">
+                <ul>
+                    <li>Phòng Net - Phòng Game</li>
+                    <li>PC Gaming, Workstation</li>
+                    <li>Laptop - Máy tính xách tay</li>
+                    <li>Màn Hình Máy Tính</li>
+                    <li>Mainboard - Bo Mạch Chủ</li>
+                    <li>CPU - Bộ Vi Xử Lý</li>
+                    <li>VGA - Card Màn Hình</li>
+                    <li>RAM - Bộ Nhớ Trong</li>
+                    <li>Ổ cứng HDD - SSD</li>
+                    <li>Nguồn máy tính (PSU)</li>
+                </ul>
+            </aside>
 
-<div class="card">
-<h2>PC Gaming RTX 3060</h2>
-<p>Ryzen 5 5600 | 16GB RAM</p>
-</div>
+            <section class="banner-area">
+                <div class="main-banner">
+                    <h2>PC HI-END WORKSTATION (Banner Chính)</h2>
+                </div>
+                <div class="sub-banners">
+                    <div class="sub-banner-item" style="border-bottom: 4px solid #ffb300;">Máy tính xách tay</div>
+                    <div class="sub-banner-item" style="border-bottom: 4px solid #29b6f6;">PC Hi-End Workstation</div>
+                    <div class="sub-banner-item" style="border-bottom: 4px solid #66bb6a;">Linh kiện chính hãng</div>
+                </div>
+            </section>
+        </main>
 
-<div class="card">
-<h2>PC Văn Phòng</h2>
-<p>I5 Gen 8 | SSD 256GB</p>
-</div>
+        <section class="product-section">
+            <div class="section-title">⚡ HÀNG MỚI VỀ - HÀNG HOT GIÁ NGON ⚡</div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">[ Ảnh PC Gaming 41 ]</div>
+                    <div class="product-name">PC Gaming 41: AMD Ryzen 5 7500F, Ram 32G, VGA 3060 12G</div>
+                    <div class="product-price">Liên hệ</div>
+                    <button class="btn-contact">Liên hệ</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">[ Ảnh PC Gaming 40 ]</div>
+                    <div class="product-name">PC Gaming 40: Core i5 13400F, Ram 32G, VGA 2060 6G</div>
+                    <div class="product-price">Liên hệ</div>
+                    <button class="btn-contact">Liên hệ</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">[ Ảnh PC Gaming 42 ]</div>
+                    <div class="product-name">PC Gaming 42: Core i5 13400F, Ram 32G, VGA 3050 8G</div>
+                    <div class="product-price">Liên hệ</div>
+                    <button class="btn-contact">Liên hệ</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">[ Ảnh PC Gaming 43 ]</div>
+                    <div class="product-name">PC Gaming 43: Core i3 12100F, Ram 16G, VGA 1650 4G</div>
+                    <div class="product-price">Liên hệ</div>
+                    <button class="btn-contact">Liên hệ</button>
+                </div>
+            </div>
+        </section>
+    </div>
 
 </body>
 </html>
